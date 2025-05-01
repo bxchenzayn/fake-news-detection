@@ -11,10 +11,11 @@ task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 2 
 
 # Task arguments
 args = {
-    'dataset_task_id': '6293848a25e34dfea3f63b4d641f887d',  # Step 1 Task ID
+    'dataset_task_id': '02c6233633a343b4b80b5bc5b31ac263',  # Will be overridden by pipeline
     'test_size': 0.3,
     'random_state': 1,
 }
+
 task.connect(args)
 
 # Get dataset from Step 1

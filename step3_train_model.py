@@ -11,7 +11,7 @@ task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 3 
 
 # Define arguments and connect
 args = {
-    'dataset_task_id': '80932355b7324a2fbdebaf61839b330e'  # Step 2 Task ID
+    'dataset_task_id': '4b14c009f79946049a02735712b44da0'  # Step 2 Task ID
 }
 task.connect(args)
 

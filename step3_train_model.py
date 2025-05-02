@@ -5,13 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 import joblib
+import os
+os.system("pip install pandas")
 
 # Initialize ClearML Task
 task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 3 - Train Model")
 
 # Define arguments and connect
 args = {
-    'dataset_task_id': '4b14c009f79946049a02735712b44da0'  # Step 2 Task ID
+    'dataset_task_id': '67f36284cc4644f5bbe4e77ca1da6933'  # Step 2 Task ID
 }
 task.connect(args)
 

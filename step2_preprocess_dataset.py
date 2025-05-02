@@ -22,7 +22,7 @@ task.connect(args)
 dataset_task = Task.get_task(task_id=args['dataset_task_id'])
 dataset_path = dataset_task.artifacts['raw_dataset'].get_local_copy()
 df = pd.read_csv(dataset_path)
-print(f"✅ Loaded dataset with shape: {df.shape}")
+print(f"Loaded dataset with shape: {df.shape}")
 
 # Drop unused columns if exist
 for col in ['subject', 'date']:

@@ -59,8 +59,8 @@ def run_pipeline():
         }
     )
 
-    pipe.start(queue="pipeline")
-    print("✅ Pipeline launched to ClearML")
+    pipe.start(queue="pipeline_start")
+    print("Pipeline launched to ClearML")
 
 if __name__ == "__main__":
     run_pipeline()

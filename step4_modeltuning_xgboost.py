@@ -5,7 +5,6 @@ import joblib
 
 # Initialize ClearML task
 task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_xgboost")
-Task.force_store_standalone_script(True)
 
 # Load artifacts from previous task
 dataset_task = Task.get_task(task_id="67f36284cc4644f5bbe4e77ca1da6933")  

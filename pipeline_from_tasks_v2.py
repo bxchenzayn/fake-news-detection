@@ -60,7 +60,7 @@ def run_pipeline():
 
     
 
-    pipe.start(queue="pipeline_start")
+    pipe.start(queue="pipeline_v2")
 
     print("Pipeline launched to ClearML")
 

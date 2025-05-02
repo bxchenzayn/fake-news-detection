@@ -79,17 +79,7 @@ def run_pipeline():
         parents=["stage_data_processing"]
     )
 
-    # Step 5 - Model Evaluation
-    pipe.add_step(
-        name="stage_model_evaluation",
-        base_task_project="Fake News Detection",
-        base_task_name="Pipeline Step 5 - Model Evaluation",
-        parents=[
-            "stage_model_tuning_passive",
-            "stage_model_tuning_svm",
-            "stage_model_tuning_xgboost"
-        ]
-    )
+    
 
     pipe.start(queue="pipeline_start")
 

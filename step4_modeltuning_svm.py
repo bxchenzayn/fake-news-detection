@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 import joblib
 
 # Initialize ClearML Task
-task = Task.init(project_name="Fake News Detection", task_name="step4-Modeltuning(LinearSVC)")
+task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_svm")
 Task.force_store_standalone_script(True)
 
 # Load artifacts from Step 2 task

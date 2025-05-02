@@ -61,21 +61,21 @@ def run_pipeline():
     pipe.add_step(
         name="stage_model_tuning_passive",
         base_task_project="Fake News Detection",
-        base_task_name="step4-Modeltuning(PassiveAggressiveClassifier)",
+        base_task_name="step4_modeltuning_passive",
         parents=["stage_data_processing"]
     )
 
     pipe.add_step(
         name="stage_model_tuning_svm",
         base_task_project="Fake News Detection",
-        base_task_name="step4-Modeltuning(LinearSVC)",
+        base_task_name="step4_modeltuning_svm",
         parents=["stage_data_processing"]
     )
 
     pipe.add_step(
         name="stage_model_tuning_xgboost",
         base_task_project="Fake News Detection",
-        base_task_name="step4-Modeltuning(XGBoostClassifier)",
+        base_task_name="step4_modeltuning_xgboost",
         parents=["stage_data_processing"]
     )
 

@@ -4,7 +4,7 @@ from sklearn.model_selection import GridSearchCV
 import joblib
 
 # Initialize ClearML task
-task = Task.init(project_name="Fake News Detection", task_name="step4-Modeltuning(XGBoostClassifier)")
+task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_xgboost")
 Task.force_store_standalone_script(True)
 
 # Load artifacts from previous task

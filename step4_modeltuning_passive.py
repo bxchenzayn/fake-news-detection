@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 import joblib
 
 # Initialize ClearML task
-task = Task.init(project_name="Fake News Detection", task_name="step4-Modeltuning(PassiveAggressiveClassifier)")
+task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_passive")
 Task.force_store_standalone_script(True)
 
 # Load artifacts from Step 2

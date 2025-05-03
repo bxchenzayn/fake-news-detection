@@ -19,14 +19,15 @@ task.connect(args)
 
 # Load dataset artifacts from Step 2
 dataset_task = Task.get_task(task_id=args['dataset_task_id'])
-X_train = dataset_task.artifacts['X_train'].get()
-X_test = dataset_task.artifacts['X_test'].get()
-y_train = dataset_task.artifacts['y_train'].get()
-y_test = dataset_task.artifacts['y_test'].get()
+
+X_train = joblib.load(dataset_task.artifacts['X_train'].get())
+X_test = joblib.load(dataset_task.artifacts['X_test'].get())
+y_train = joblib.load(dataset_task.artifacts['y_train'].get())
+y_test = joblib.load(dataset_task.artifacts['y_test'].get())
 
 # Convert to writable numpy arrays
-y_train = np.array(y_train)
-y_test = np.array(y_test)
+y_train = np.array(y_train).astype(int).ravel()
+y_test = np.array(y_test).astype(int).ravel()
 
 def train_and_log_model(name, model, X_train, y_train, X_test, y_test):
     print(f"\nTraining {name}...")

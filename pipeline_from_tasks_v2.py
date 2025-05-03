@@ -23,30 +23,20 @@ def run_pipeline():
 
     pipe.set_default_execution_queue("pipeline")
 
-    # Step 1 - Data Import
+    # Step 1 - Use completed task
     pipe.add_step(
         name="stage_data_import",
-        base_task_project="Fake News Detection",
-        base_task_name="Pipeline step 1 dataset artifact",
-        parameter_override={
-            "General/dataset_url": "https://drive.google.com/uc?id=167qj2TvumhjbFPvZHp6CIGZ7aqx5SG_s"
-        }
+        base_task_id="36c9768c38f84f4883aa06a4b9648d2a"
     )
 
-    # Step 2 - Data Preprocessing
+    # Step 2 - Use completed task
     pipe.add_step(
         name="stage_data_processing",
-        base_task_project="Fake News Detection",
-        base_task_name="Pipeline Step 2 - Preprocess Dataset",
-        parents=["stage_data_import"],
-        parameter_override={
-            "General/dataset_task_id": "${stage_data_import.id}",
-            "General/test_size": 0.3,
-            "General/random_state": 1
-        }
+        base_task_id="b6ffb01acf514bff91439f27374d6b06",
+        parents=["stage_data_import"]
     )
 
-    # Step 3 - Model Training
+    # Step 3 - Model Training (Start from here)
     pipe.add_step(
         name="stage_model_multiple_training",
         base_task_project="Fake News Detection",

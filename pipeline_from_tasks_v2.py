@@ -21,7 +21,7 @@ def run_pipeline():
         add_pipeline_tags=False
     )
 
-    pipe.set_default_execution_queue("pipeline")
+    pipe.set_default_execution_queue("pipeline_v2")
 
     # Step 1 - Data Import
     pipe.add_step(

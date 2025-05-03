@@ -24,7 +24,7 @@ X_test = dataset_task.artifacts['X_test'].get()
 y_train = dataset_task.artifacts['y_train'].get()
 y_test = dataset_task.artifacts['y_test'].get()
 
-# Convert to writable numpy arrays if needed
+# Convert to writable numpy arrays
 y_train = np.array(y_train)
 y_test = np.array(y_test)
 

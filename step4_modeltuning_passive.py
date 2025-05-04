@@ -3,6 +3,8 @@ from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 import joblib
+import os
+import atexit
 
 # Initialize ClearML task
 task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_passive")
@@ -40,6 +42,14 @@ print("Test Accuracy:", accuracy_score(y_test, best_model.predict(X_test)))
 model_path = "PassiveAggressive_best_model.pkl"
 joblib.dump(best_model, model_path)
 task.upload_artifact("best_model", artifact_object=model_path)
+
+@atexit.register
+def cleanup():
+    try:
+        os.remove(model_path)
+        print(f"Removed temporary file: {model_path}")
+    except Exception as e:
+        print(f"Could not remove model file: {e}")
 
 print("Tuning complete. Model uploaded.")
 print(f"Task link: {task.get_output_log_web_page()}")

@@ -7,6 +7,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 import joblib
+from pathlib import Path
+import os
+os.system("pip install pandas")
+
 
 # Initialize ClearML task
 task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 3 - Train Multiple Models")
@@ -20,10 +24,17 @@ task.connect(args)
 # Load dataset artifacts from Step 2
 dataset_task = Task.get_task(task_id=args['dataset_task_id'])
 
-X_train = joblib.load(dataset_task.artifacts['X_train'].get())
-X_test = joblib.load(dataset_task.artifacts['X_test'].get())
-y_train = joblib.load(dataset_task.artifacts['y_train'].get())
-y_test = joblib.load(dataset_task.artifacts['y_test'].get())
+# Safe loading logic (compatible with both local and pipeline execution)
+def safe_load(artifact):
+    obj = artifact.get()
+    if isinstance(obj, (str, Path)):
+        return joblib.load(str(obj))
+    return obj
+
+X_train = safe_load(dataset_task.artifacts['X_train'])
+X_test = safe_load(dataset_task.artifacts['X_test'])
+y_train = safe_load(dataset_task.artifacts['y_train'])
+y_test = safe_load(dataset_task.artifacts['y_test'])
 
 # Convert to writable numpy arrays
 y_train = np.array(y_train).astype(int).ravel()

@@ -18,7 +18,7 @@ def run_pipeline():
     pipe = PipelineController(
         name="Fake News Detection Pipeline",
         project="Fake News Detection",
-        version="2.0.0",
+        version="2.0.3",
         add_pipeline_tags=False
     )
 
@@ -29,7 +29,7 @@ def run_pipeline():
         name="stage_data_import",
         base_task_project="Fake News Detection",
         base_task_name="Pipeline step 1 dataset artifact",
-        parameter_override={
+       parameter_override={
             "General/dataset_url": "https://drive.google.com/uc?id=167qj2TvumhjbFPvZHp6CIGZ7aqx5SG_s"
         }
     )
@@ -58,8 +58,57 @@ def run_pipeline():
         }
     )
 
+    # Step 4 - Model Tuning (3 models)
+    pipe.add_step(
+        name="stage_model_tuning_passive",
+        base_task_project="Fake News Detection",
+        base_task_name="step4_modeltuning_passive",
+        parents=["stage_data_processing"],
+        parameter_override={
+            "General/dataset_task_id": "${stage_data_processing.id}"
+        }
+    )
 
-    
+    pipe.add_step(
+        name="stage_model_tuning_svm",
+        base_task_project="Fake News Detection",
+        base_task_name="step4_modeltuning_svm",
+        parents=["stage_data_processing"],
+        parameter_override={
+            "General/dataset_task_id": "${stage_data_processing.id}"
+        }
+    )
+
+    pipe.add_step(
+        name="stage_model_tuning_xgboost",
+        base_task_project="Fake News Detection",
+        base_task_name="step4_modeltuning_xgboost",
+        parents=["stage_data_processing"],
+        parameter_override={
+            "General/dataset_task_id": "${stage_data_processing.id}"
+        }
+    )
+
+    # Step 5 - Model Evaluation
+    pipe.add_step(
+        name="stage_model_evaluation",
+        base_task_project="Fake News Detection",
+        base_task_name="Pipeline Step 5 - Model Evaluation",
+        parents=[
+            "stage_model_tuning_passive",
+            "stage_model_tuning_svm",
+            "stage_model_tuning_xgboost"
+        ],
+        parameter_override={
+            "General/dataset_task_id": "${stage_data_processing.id}",
+            "General/passive_task_id": "${stage_model_tuning_passive.id}",
+            "General/svm_task_id": "${stage_model_tuning_svm.id}",
+            "General/xgboost_task_id": "${stage_model_tuning_xgboost.id}"
+}
+    )
+
+
+
 
     pipe.start(queue="pipeline_v2")
 

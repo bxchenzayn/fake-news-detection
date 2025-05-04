@@ -1,7 +1,10 @@
 from clearml import Task
 from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
 import joblib
+import os
+import atexit
 
 # Initialize ClearML task
 task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_xgboost")
@@ -30,20 +33,29 @@ grid = GridSearchCV(estimator=xgb_model, param_grid=param_grid, scoring='accurac
 # Train the model
 grid.fit(X_train, y_train)
 
-# Extract the best model and results
+# Best model and score
 best_model = grid.best_estimator_
-best_params = grid.best_params_
-best_score = grid.best_score_
-test_score = best_model.score(X_test, y_test)
+print("Best Params:", grid.best_params_)
+print("Best Accuracy (CV):", grid.best_score_)
+print("Test Accuracy:", accuracy_score(y_test, best_model.predict(X_test)))
 
-# Print results
-print("Best Params:", best_params)
-print("Best Accuracy (CV):", best_score)
-print("Test Accuracy:", test_score)
+
+
 
 # Save and upload the best model
-joblib.dump(best_model, "XGBoost_best_model.pkl")
-task.upload_artifact("best_model", artifact_object="XGBoost_best_model.pkl")
+model_path = "XGBoost_best_model.pkl"
+joblib.dump(best_model, model_path)
+task.upload_artifact("best_model", artifact_object=model_path)
+
+@atexit.register
+def cleanup():
+    try:
+        os.remove(model_path)
+        print(f"Removed temporary file: {model_path}")
+    except Exception as e:
+        print(f"Could not remove model file: {e}")
 
 # Close the task
+print("Tuning complete. Model uploaded.")
+print(f"Task link: {task.get_output_log_web_page()}")
 task.close()

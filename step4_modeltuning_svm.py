@@ -3,6 +3,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score
 import joblib
+import os
+import atexit
 
 # Initialize ClearML Task
 task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_svm")
@@ -45,6 +47,15 @@ print("Test Accuracy:", test_accuracy)
 model_path = "LinearSVC_best_model.pkl"
 joblib.dump(best_model, model_path)
 task.upload_artifact("best_model", artifact_object=model_path)
+
+@atexit.register
+def cleanup():
+    try:
+        os.remove(model_path)
+        print(f"Removed temporary file: {model_path}")
+    except Exception as e:
+        print(f"Could not remove model file: {e}")
+
 
 print("Tuning complete.")
 print(f"Task link: {task.get_output_log_web_page()}")

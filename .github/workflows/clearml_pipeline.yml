@@ -2,7 +2,7 @@ name: Auto Test Step 1 - ClearML Dataset Upload
 
 on:
   push:
-    branches: [main]  # ✅ 每次 push 到 main 分支都会自动触发
+    branches: [master]  # ✅ 每次 push 到 main 分支都会自动触发
 
 jobs:
   test_step1:

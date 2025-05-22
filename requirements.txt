@@ -1,27 +1,17 @@
+# Core
 clearml==1.14.2
+
+# Data Processing
 pandas==1.5.3
 numpy==1.24.4
 scikit-learn==1.2.2
 nltk==3.8.1
 gdown==4.7.1
+
+# Modeling
 xgboost==1.7.6
 joblib==1.2.0
 matplotlib==3.7.1
 
-# Core ClearML
-clearml
-
-# Data Processing
-pandas
-numpy
-scikit-learn
-nltk
-gdown
-
-# Modeling
-xgboost
-joblib
-matplotlib
-
-# Optional (避免缺模块报错)
+# Optional but harmless
 pathlib

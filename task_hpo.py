@@ -19,10 +19,10 @@ task = Task.init(
 
 # Connect parameters
 args = {
-    'base_train_task_id': 'eff3100d025c43a6a8e977195fe95f72',
+    'base_train_task_id': '17744ee73f844948adbd538a306aa5a0',
     'processed_dataset_id': '67f36284cc4644f5bbe4e77ca1da6933',
-    'num_trials': 3,
-    'time_limit_minutes': 5,
+    'num_trials': 30,
+    'time_limit_minutes': 30,
     'run_as_service': False,
     'test_queue': 'pipeline',
     'num_epochs': 20,
@@ -103,7 +103,8 @@ try:
         best_exp = top_exp[0]
         best_params = best_exp.get_parameters()
         metrics = best_exp.get_last_scalar_metrics()
-        best_accuracy = metrics['validation']['accuracy'][-1] if metrics and 'validation' in metrics and 'accuracy' in metrics['validation'] else None
+        accuracy_dict = metrics.get('validation', {}).get('accuracy', {})
+        best_accuracy = accuracy_dict[max(accuracy_dict)] if accuracy_dict else None
 
         logger.info("Best Parameters Found:")
         for k, v in best_params.items():

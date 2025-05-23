@@ -30,7 +30,7 @@ args = task.connect(args)
 logger.info(f"Connected parameters: {args}")
 
 # Execute remotely
-task.execute_remotely()
+#task.execute_remotely()
 
 # Load preprocessed data from previous task (Step 2)
 dataset_task = Task.get_task(task_id="67f36284cc4644f5bbe4e77ca1da6933")

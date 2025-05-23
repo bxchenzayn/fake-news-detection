@@ -1,4 +1,4 @@
-from clearml import Task
+from clearml import Task, Logger
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
@@ -37,16 +37,25 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 print("Best Params:", grid.best_params_)
 print("Best Accuracy (CV):", grid.best_score_)
-print("Test Accuracy:", accuracy_score(y_test, best_model.predict(X_test)))
 
+# Compute and report validation accuracy
+val_accuracy = accuracy_score(y_test, best_model.predict(X_test))
+print("Test Accuracy:", val_accuracy)
 
-
+# Report scalar to ClearML for HPO tracking
+Logger.current_logger().report_scalar(
+    title="validation",
+    series="accuracy",
+    value=val_accuracy,
+    iteration=1
+)
 
 # Save and upload the best model
 model_path = "XGBoost_best_model.pkl"
 joblib.dump(best_model, model_path)
 task.upload_artifact("best_model", artifact_object=model_path)
 
+# Cleanup saved file at exit
 @atexit.register
 def cleanup():
     try:

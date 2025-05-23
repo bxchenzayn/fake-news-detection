@@ -1,0 +1,9 @@
+{
+    "parameters": {
+        "General/learning_rate": "0.11435515498593958",
+        "General/max_depth": "7",
+        "General/n_estimators": "150",
+        "General/subsample": "0.9961235362929102"
+    },
+    "accuracy": null
+}

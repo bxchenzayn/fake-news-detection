@@ -19,10 +19,10 @@ task = Task.init(
 
 # Connect parameters
 args = {
-    'base_train_task_id': '11875a1464c74f90aac917bbb47abca1',
+    'base_train_task_id': 'eff3100d025c43a6a8e977195fe95f72',
     'processed_dataset_id': '67f36284cc4644f5bbe4e77ca1da6933',
     'num_trials': 3,
-    'time_limit_minutes': 10,
+    'time_limit_minutes': 5,
     'run_as_service': False,
     'test_queue': 'pipeline',
     'num_epochs': 20,

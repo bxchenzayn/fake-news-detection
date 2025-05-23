@@ -6,7 +6,7 @@ import atexit
 import os
 
 # Initialize ClearML Task
-task = Task.init(project_name="Fake News Detection", task_name="step3_xgboostmodeltrain_hpo_ready")
+task = Task.init(project_name="Fake News Detection", task_name="step3_xgboostmodeltrain")
 
 # Define and connect hyperparameters for HPO to override
 params = {

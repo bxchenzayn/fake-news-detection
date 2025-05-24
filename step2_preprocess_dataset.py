@@ -5,6 +5,7 @@ import nltk
 import re
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
+import joblib
 
 # Initialize ClearML Task
 task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 2 - Preprocess Dataset")
@@ -67,6 +68,12 @@ df['label'] = df['label'].astype(int)
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(df['text'])
 y = df['label']
+
+#Save vectorizer
+import joblib
+vectorizer_path = "tfidf_vectorizer.pkl"
+joblib.dump(vectorizer, vectorizer_path)
+task.upload_artifact("tfidf_vectorizer", artifact_object=vectorizer_path)
 
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(

@@ -86,6 +86,8 @@ task.upload_artifact("X_test", X_test)
 task.upload_artifact("y_train", y_train)
 task.upload_artifact("y_test", y_test)
 
+task.set_parameters({"General/processed_dataset_id": task.id})
+
 print("Uploaded artifacts: X_train, X_test, y_train, y_test")
 print(f"Task link: {task.get_output_log_web_page()}")
 print(f"Task ID: {task.id}")

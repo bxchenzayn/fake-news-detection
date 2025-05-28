@@ -19,8 +19,8 @@ task = Task.init(
 
 # Connect parameters
 args = {
-    'base_train_task_id': '17744ee73f844948adbd538a306aa5a0',
-    'processed_dataset_id': '67f36284cc4644f5bbe4e77ca1da6933',
+    'base_train_task_id': '069426c09ce24d5aa36da71ca55147e0',
+    'processed_dataset_id': 'f4830f8a2cba413484b470e9df0fad1d',
     'num_trials': 30,
     'time_limit_minutes': 30,
     'run_as_service': False,
@@ -43,7 +43,7 @@ if not dataset_id:
     logger.info(f"No dataset_id in General namespace, using from args: {dataset_id}")
 
 if not dataset_id:
-    dataset_id = "67f36284cc4644f5bbe4e77ca1da6933"
+    dataset_id = "f4830f8a2cba413484b470e9df0fad1d"
     logger.info(f"Using fallback fixed dataset ID: {dataset_id}")
 
 logger.info(f"Using dataset ID: {dataset_id}")

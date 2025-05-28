@@ -13,11 +13,11 @@ os.system("pip install pandas")
 
 
 # Initialize ClearML task
-task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 3 - Train Multiple Models")
+task = Task.init(project_name="Fake News Detection v1", task_name="Pipeline Step 3 - Train Multiple Models")
 
 # Get parameters (from pipeline)
 args = {
-    'dataset_task_id': '67f36284cc4644f5bbe4e77ca1da6933' #step2 id
+    'dataset_task_id': 'acd84b861968414aa4e64ccd40b6e037' #step2 id
 }
 task.connect(args)
 

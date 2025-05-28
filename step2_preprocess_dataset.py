@@ -8,11 +8,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import joblib
 
 # Initialize ClearML Task
-task = Task.init(project_name="Fake News Detection", task_name="Pipeline Step 2 - Preprocess Dataset")
+task = Task.init(project_name="Fake News Detection v1", task_name="Pipeline Step 2 - Preprocess Dataset")
 
 # Task arguments
 args = {
-    'dataset_task_id': '02c6233633a343b4b80b5bc5b31ac263',  # Will be overridden by pipeline
+    'dataset_task_id': '4dbb68b1f7814280a066303850bf7428',  # Will be overridden by pipeline
     'test_size': 0.3,
     'random_state': 1,
 }
@@ -64,10 +64,13 @@ df = df[df['text'].str.strip().astype(bool)]
 df = df.dropna(subset=['label'])
 df['label'] = df['label'].astype(int)
 
+
 # TF-IDF vectorization
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(df['text'])
 y = df['label']
+
+print("Label distribution:", y.value_counts())
 
 #Save vectorizer
 import joblib

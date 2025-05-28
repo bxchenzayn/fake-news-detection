@@ -2,7 +2,7 @@ from clearml import Task
 import gdown
 
 # Initialize ClearML Task and receive dynamic parameters
-task = Task.init(project_name="Fake News Detection", task_name="Pipeline step 1 dataset artifact")
+task = Task.init(project_name="Fake News Detection v1", task_name="Pipeline step 1 dataset artifact")
 Task.force_store_standalone_script(True)
 
 # Receive dataset_url from pipeline

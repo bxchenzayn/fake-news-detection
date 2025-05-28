@@ -10,7 +10,7 @@ import atexit
 task = Task.init(project_name="Fake News Detection", task_name="step4_modeltuning_xgboost")
 
 # Load artifacts from previous task
-dataset_task = Task.get_task(task_id="67f36284cc4644f5bbe4e77ca1da6933")  
+dataset_task = Task.get_task(task_id="f4830f8a2cba413484b470e9df0fad1d")  
 X_train = dataset_task.artifacts['X_train'].get()
 y_train = dataset_task.artifacts['y_train'].get().copy().ravel()
 X_test = dataset_task.artifacts['X_test'].get()
